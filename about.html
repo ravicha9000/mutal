@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us &amp; Contact — India Mutual Fund Dashboard</title>
+  <meta name="description" content="About India Mutual Fund Dashboard — our mission, disclaimer, privacy policy and contact information." />
+  <meta name="keywords" content="about mutual fund dashboard India, contact, disclaimer, privacy policy" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <style>
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
+    }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .team-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; text-align: center;
+    }
+    .team-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin: 0 auto 14px;
+    }
+    .team-name { font-weight: 700; margin-bottom: 4px; }
+    .team-role { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
+    .contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
+    .contact-info-item {
+      display: flex; align-items: flex-start; gap: 14px; padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-info-item:last-child { border-bottom: none; }
+    .contact-icon { font-size: 1.5rem; width: 40px; text-align: center; flex-shrink: 0; }
+    .contact-label { font-weight: 700; margin-bottom: 4px; }
+    .contact-value { color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .team-grid  { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-icon" aria-hidden="true">📈</span>
+      <span>MF Dashboard</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+      <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+      <li><a href="research-portals.html">🔬 Research</a></li>
+      <li><a href="learn.html">📚 Learn</a></li>
+      <li><a href="about.html" aria-current="page">ℹ️ About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button id="hamburger" class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="mobileNav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <ul role="list">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+    <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+    <li><a href="research-portals.html">🔬 Research</a></li>
+    <li><a href="learn.html">📚 Learn</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+  </ul>
+</div>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<header class="page-hero">
+  <div class="container">
+    <h1>About MF Dashboard</h1>
+    <p>Our mission is to democratise mutual fund investing by providing free, data-driven insights to every Indian investor.</p>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- About section -->
+  <section class="section" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-grid fade-in">
+        <div>
+          <h2 class="section-title" id="about-heading">Our Mission</h2>
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:16px">India Mutual Fund Dashboard was built with one goal: to make professional-grade mutual fund research accessible to every Indian investor — whether they are investing their first ₹500 or managing a multi-crore portfolio.</p>
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:16px">We believe that <strong>informed investing</strong> leads to better outcomes. Too many retail investors make decisions based on hearsay or recent performance. We aim to change that by presenting comprehensive, easy-to-understand data on all major Indian mutual fund schemes.</p>
+          <p style="color:var(--text-secondary);line-height:1.8">Our platform is <strong>completely free</strong>, not SEBI registered, and maintained as an educational resource. Always consult a qualified financial advisor before making investment decisions.</p>
+        </div>
+        <div>
+          <div class="stats-grid" style="grid-template-columns:1fr 1fr">
+            <div class="stat-card" style="text-align:center">
+              <div class="stat-value" style="font-size:1.8rem">34+</div>
+              <div class="stat-label" style="margin-top:4px">Funds Tracked</div>
+            </div>
+            <div class="stat-card" style="text-align:center">
+              <div class="stat-value" style="font-size:1.8rem">3</div>
+              <div class="stat-label" style="margin-top:4px">Categories</div>
+            </div>
+            <div class="stat-card" style="text-align:center">
+              <div class="stat-value" style="font-size:1.8rem">Free</div>
+              <div class="stat-label" style="margin-top:4px">Forever</div>
+            </div>
+            <div class="stat-card" style="text-align:center">
+              <div class="stat-value" style="font-size:1.8rem">🇮🇳</div>
+              <div class="stat-label" style="margin-top:4px">Made for India</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" style="background:var(--bg-card);border-top:1px solid var(--border)" aria-labelledby="features-heading">
+    <div class="container">
+      <div class="section-header" style="text-align:center">
+        <h2 class="section-title" id="features-heading">What We Offer</h2>
+        <p class="section-subtitle">Tools and resources to help you invest smarter</p>
+      </div>
+      <div class="grid-3 fade-in">
+        <div class="card">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:16px" aria-hidden="true">📊</div>
+            <h3 style="font-weight:700;margin-bottom:8px">Fund Database</h3>
+            <p style="color:var(--text-secondary);font-size:0.88rem">Comprehensive data on 34+ top Indian mutual funds across equity, debt and hybrid categories.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:16px" aria-hidden="true">⚖️</div>
+            <h3 style="font-weight:700;margin-bottom:8px">Fund Comparison</h3>
+            <p style="color:var(--text-secondary);font-size:0.88rem">Compare up to 4 funds side-by-side across NAV, returns, AUM, risk, ratings and expense ratios.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:16px" aria-hidden="true">🧮</div>
+            <h3 style="font-weight:700;margin-bottom:8px">SIP Calculator</h3>
+            <p style="color:var(--text-secondary);font-size:0.88rem">Plan your investments with our interactive SIP return calculator and see the power of compounding.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:16px" aria-hidden="true">🔬</div>
+            <h3 style="font-weight:700;margin-bottom:8px">Research Links</h3>
+            <p style="color:var(--text-secondary);font-size:0.88rem">Curated list of official portals, research platforms and AMC websites for deeper analysis.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:16px" aria-hidden="true">📚</div>
+            <h3 style="font-weight:700;margin-bottom:8px">Education Hub</h3>
+            <p style="color:var(--text-secondary);font-size:0.88rem">Beginner-friendly articles on fund types, SIP, taxation, and investment strategies.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:16px" aria-hidden="true">🌙</div>
+            <h3 style="font-weight:700;margin-bottom:8px">Dark Mode</h3>
+            <p style="color:var(--text-secondary);font-size:0.88rem">Easy on your eyes at night. Toggle between light and dark themes instantly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2 class="section-title" id="contact-heading">Contact Us</h2>
+          <p style="color:var(--text-secondary);margin-bottom:24px">Have a question, suggestion, or found an error? We'd love to hear from you.</p>
+          <div class="card">
+            <div class="card-body" style="padding:0">
+              <div class="contact-info-item">
+                <div class="contact-icon" aria-hidden="true">📧</div>
+                <div>
+                  <div class="contact-label">Email</div>
+                  <div class="contact-value">hello@mfdashboard.in (example)</div>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon" aria-hidden="true">🐦</div>
+                <div>
+                  <div class="contact-label">Twitter / X</div>
+                  <div class="contact-value">@MFDashboardIN</div>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon" aria-hidden="true">💬</div>
+                <div>
+                  <div class="contact-label">GitHub</div>
+                  <div class="contact-value"><a href="https://github.com/ravicha9000/mutal" target="_blank" rel="noopener noreferrer">github.com/ravicha9000/mutal</a></div>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon" aria-hidden="true">📍</div>
+                <div>
+                  <div class="contact-label">Location</div>
+                  <div class="contact-value">India 🇮🇳</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form fade-in">
+          <h3 style="font-weight:700;margin-bottom:20px">Send a Message</h3>
+          <form id="contactForm" novalidate onsubmit="submitContact(event)">
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div class="form-group">
+                <label class="form-label" for="contactName">Your Name <span aria-hidden="true" style="color:var(--danger)">*</span></label>
+                <input type="text" id="contactName" name="name" class="form-control" placeholder="Rahul Sharma" required aria-required="true" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contactEmail">Email Address <span aria-hidden="true" style="color:var(--danger)">*</span></label>
+                <input type="email" id="contactEmail" name="email" class="form-control" placeholder="rahul@example.com" required aria-required="true" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contactSubject">Subject</label>
+                <select id="contactSubject" name="subject" class="form-control" aria-label="Message subject">
+                  <option value="">Select a topic…</option>
+                  <option value="data-error">Data Error / Inaccuracy</option>
+                  <option value="feature">Feature Request</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contactMessage">Message <span aria-hidden="true" style="color:var(--danger)">*</span></label>
+                <textarea id="contactMessage" name="message" class="form-control" rows="5" placeholder="Your message here…" required aria-required="true" style="resize:vertical"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message 📤</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="section" id="disclaimer" style="background:var(--bg-card);border-top:1px solid var(--border)" aria-labelledby="disclaimer-heading">
+    <div class="container">
+      <h2 class="section-title" id="disclaimer-heading">⚠️ Disclaimer</h2>
+      <div class="alert alert-warning fade-in" style="margin-bottom:16px">
+        <span aria-hidden="true">⚠️</span>
+        <strong>Important: Please read before investing.</strong>
+      </div>
+      <div style="color:var(--text-secondary);line-height:1.8;display:flex;flex-direction:column;gap:12px" class="fade-in">
+        <p>The information provided on India Mutual Fund Dashboard is for <strong>educational and informational purposes only</strong>. It does not constitute investment advice, financial advice, trading advice, or any other sort of advice.</p>
+        <p>We are <strong>not registered with SEBI</strong> as an investment advisor or research analyst. The fund data displayed is sourced from publicly available information and may not be real-time or complete. Always verify data from official sources like AMFI and the fund house's own website before investing.</p>
+        <p><strong>Mutual fund investments are subject to market risks.</strong> Past performance is not indicative of future results. The NAV of funds can go up or down depending on the forces of supply and demand in the securities market.</p>
+        <p>Before investing, read all scheme-related documents carefully. Consider consulting a SEBI-registered investment advisor who understands your specific financial situation and goals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Policy -->
+  <section class="section" id="privacy" aria-labelledby="privacy-heading">
+    <div class="container" style="max-width:800px">
+      <h2 class="section-title" id="privacy-heading">🔒 Privacy Policy</h2>
+      <div style="color:var(--text-secondary);line-height:1.8;display:flex;flex-direction:column;gap:12px" class="fade-in">
+        <p><strong>Data Collection:</strong> This website does not collect any personal data by default. The contact form on this page is for demonstration purposes only — no data is transmitted to any server.</p>
+        <p><strong>Local Storage:</strong> We store your theme preference (dark/light mode) in your browser's localStorage. No cookies are set and no tracking is performed.</p>
+        <p><strong>Third-Party Links:</strong> This site links to external websites (AMFI, SEBI, fund houses, etc.). We are not responsible for their privacy practices. Please review their respective privacy policies.</p>
+        <p><strong>Analytics:</strong> No analytics or tracking tools are used on this website.</p>
+        <p>Last updated: March 2025</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <span class="brand-icon" aria-hidden="true">📈</span>
+          <span style="color:white">MF Dashboard</span>
+        </a>
+        <p>India's comprehensive mutual fund tracking and comparison platform.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fund Categories</h4>
+        <ul role="list">
+          <li><a href="equity-funds.html">Equity Funds</a></li>
+          <li><a href="debt-funds.html">Debt Funds</a></li>
+          <li><a href="debt-funds.html#hybrid">Hybrid Funds</a></li>
+          <li><a href="equity-funds.html#elss">ELSS / Tax Saving</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul role="list">
+          <li><a href="research-portals.html">Research Portals</a></li>
+          <li><a href="learn.html">Learn Investing</a></li>
+          <li><a href="learn.html#sip-calculator">SIP Calculator</a></li>
+          <li><a href="learn.html#glossary">Glossary</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul role="list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="about.html#disclaimer">Disclaimer</a></li>
+          <li><a href="about.html#privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MF Dashboard. For educational purposes only.</span>
+      <div class="footer-bottom-links">
+        <a href="about.html#disclaimer">Disclaimer</a>
+        <a href="about.html#privacy">Privacy</a>
+        <a href="about.html#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  function submitContact(e) {
+    e.preventDefault();
+    var form = document.getElementById('contactForm');
+    if (!window.validateForm(form)) return;
+    // Simulate submission
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    setTimeout(function () {
+      window.showToast && window.showToast('Message sent! We will get back to you soon.', 'success');
+      form.reset();
+      btn.disabled = false;
+      btn.textContent = 'Send Message 📤';
+    }, 1200);
+  }
+</script>
+</body>
+</html>

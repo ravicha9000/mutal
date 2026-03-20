@@ -1,0 +1,244 @@
+/* =============================================
+   Dashboard-specific Styles
+   ============================================= */
+
+/* ── Filters bar ─────────────────────────── */
+.filters-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.filters-row {
+  display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end;
+}
+
+.filters-row .form-group { min-width: 160px; flex: 1; }
+.filters-row .form-group.search { flex: 2; min-width: 220px; }
+
+.filters-actions {
+  display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0;
+}
+
+/* ── Fund table ──────────────────────────── */
+.fund-name-cell { display: flex; flex-direction: column; gap: 2px; }
+.fund-name      { font-weight: 600; color: var(--text-primary); font-size: 0.9rem; }
+.fund-category  { font-size: 0.75rem; color: var(--text-muted); }
+
+.return-val { font-weight: 700; }
+.return-val.pos { color: var(--secondary); }
+.return-val.neg { color: var(--danger); }
+
+/* ── Comparison Panel ────────────────────── */
+.comparison-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+  background: var(--bg-header); border-top: 2px solid var(--primary);
+  box-shadow: 0 -4px 20px rgba(0,0,0,.12);
+  padding: 12px 0; transition: transform var(--transition);
+}
+.comparison-bar.hidden { transform: translateY(100%); }
+.comparison-bar .container {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.comparison-items {
+  display: flex; gap: 10px; flex: 1; flex-wrap: wrap;
+}
+.comparison-chip {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--primary-light); color: var(--primary);
+  padding: 6px 12px; border-radius: 9999px; font-size: 0.82rem; font-weight: 600;
+}
+.comparison-chip button {
+  background: none; border: none; cursor: pointer; color: var(--primary);
+  padding: 0; display: flex; align-items: center; font-size: 1rem;
+}
+.compare-label { font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
+
+/* ── Comparison Modal ────────────────────── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,.5); align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg-card); border-radius: var(--radius);
+  max-width: 860px; width: 100%; max-height: 90vh;
+  overflow-y: auto; box-shadow: var(--shadow-lg);
+  animation: modalIn .2s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.modal-header {
+  padding: 20px 24px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0;
+  background: var(--bg-card); z-index: 1;
+}
+.modal-header h3 { font-size: 1.1rem; font-weight: 700; }
+.modal-close {
+  background: none; border: none; cursor: pointer; color: var(--text-muted);
+  font-size: 1.4rem; line-height: 1; padding: 4px; border-radius: 6px;
+  transition: all var(--transition);
+}
+.modal-close:hover { background: var(--danger-light); color: var(--danger); }
+.modal-body { padding: 24px; }
+
+/* Comparison table inside modal */
+.compare-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.compare-table th, .compare-table td {
+  padding: 12px 14px; border: 1px solid var(--border); text-align: center;
+}
+.compare-table th { background: var(--bg-page); font-weight: 700; }
+.compare-table th:first-child,
+.compare-table td:first-child { text-align: left; font-weight: 600; width: 160px; }
+.compare-table .best { background: var(--secondary-light); }
+[data-theme="dark"] .compare-table .best { background: #0d3025; }
+
+/* ── Dashboard hero stats ────────────────── */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 32px;
+}
+.hero-stat {
+  background: rgba(255,255,255,.12);
+  padding: 20px 24px; text-align: center;
+}
+.hero-stat-value { font-size: 1.75rem; font-weight: 800; }
+.hero-stat-label { font-size: 0.8rem; opacity: .75; margin-top: 4px; }
+
+/* ── Category cards ──────────────────────── */
+.category-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-bottom: 36px;
+}
+.category-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  cursor: pointer; transition: all var(--transition);
+  position: relative; overflow: hidden;
+}
+.category-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.category-card.equity::before  { background: var(--primary); }
+.category-card.debt::before    { background: var(--secondary); }
+.category-card.hybrid::before  { background: #f59e0b; }
+
+.category-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+.category-icon  { font-size: 2rem; margin-bottom: 12px; }
+.category-name  { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+.category-desc  { color: var(--text-muted); font-size: 0.82rem; }
+.category-count {
+  margin-top: 14px; font-size: 0.78rem; font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ── Fund list card ──────────────────────── */
+.fund-list-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 24px;
+}
+.fund-list-header {
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  font-weight: 700; font-size: 1rem;
+}
+
+.fund-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+  gap: 12px;
+  padding: 14px 22px; border-bottom: 1px solid var(--border);
+  align-items: center; transition: background var(--transition);
+}
+.fund-row:last-child { border-bottom: none; }
+.fund-row:hover { background: var(--bg-page); }
+.fund-row-header {
+  background: var(--bg-page); font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted);
+}
+
+.fund-actions { display: flex; gap: 6px; }
+.btn-compare {
+  padding: 5px 11px; font-size: 0.78rem; border-radius: 6px; font-weight: 600;
+  border: 1.5px solid var(--primary); color: var(--primary); background: transparent;
+  cursor: pointer; transition: all var(--transition);
+}
+.btn-compare:hover, .btn-compare.selected {
+  background: var(--primary); color: white;
+}
+
+/* ── Tabs ────────────────────────────────── */
+.tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.tab-btn {
+  padding: 10px 20px; border-radius: 8px 8px 0 0; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; background: none; border: none; color: var(--text-secondary);
+  position: relative; bottom: -2px; border-bottom: 2px solid transparent;
+  transition: all var(--transition);
+}
+.tab-btn:hover { color: var(--primary); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── Chart placeholder ───────────────────── */
+.chart-placeholder {
+  background: var(--bg-page); border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px; color: var(--text-muted);
+  font-size: 0.85rem; text-align: center;
+  padding: 40px;
+}
+.chart-placeholder .chart-icon { font-size: 2.5rem; }
+
+/* ── Pagination ──────────────────────────── */
+.pagination {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0; flex-wrap: wrap; gap: 12px;
+}
+.pagination-info { font-size: 0.85rem; color: var(--text-secondary); }
+.pagination-btns { display: flex; gap: 6px; }
+.page-btn {
+  min-width: 36px; height: 36px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--bg-card);
+  color: var(--text-secondary); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all var(--transition); display: flex;
+  align-items: center; justify-content: center;
+}
+.page-btn:hover, .page-btn.active {
+  background: var(--primary); color: white; border-color: var(--primary);
+}
+.page-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ── Responsive overrides ────────────────── */
+@media (max-width: 900px) {
+  .category-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .fund-row {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+  .fund-row-header { display: none; }
+  .fund-row .fund-name-cell { grid-row: 1; grid-column: 1; }
+  .fund-row .fund-actions  { grid-row: 1; grid-column: 2; }
+  .fund-returns-wrap {
+    grid-row: 2; grid-column: 1 / -1;
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .return-item { display: flex; flex-direction: column; gap: 2px; }
+  .return-item .label { font-size: 0.7rem; color: var(--text-muted); }
+
+  .hero-stats { grid-template-columns: 1fr; }
+  .category-grid { grid-template-columns: 1fr; }
+}

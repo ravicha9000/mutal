@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn Mutual Fund Investing — India Mutual Fund Dashboard</title>
+  <meta name="description" content="Learn mutual fund basics — SIP, NAV, expense ratio, types of funds, tax implications and investment strategies for Indian investors." />
+  <meta name="keywords" content="learn mutual fund India, SIP calculator, what is NAV, ELSS tax saving, mutual fund for beginners" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <style>
+    .learn-grid {
+      display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start;
+    }
+    .learn-sidebar {
+      position: sticky; top: calc(var(--nav-height) + 20px);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .learn-sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 12px; font-weight: 700; }
+    .learn-sidebar ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .learn-sidebar a { display: block; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 0.88rem; color: var(--text-secondary); transition: all var(--transition); }
+    .learn-sidebar a:hover { background: var(--primary-light); color: var(--primary); }
+    .article-section { margin-bottom: 56px; scroll-margin-top: calc(var(--nav-height) + 20px); }
+    .article-section h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+    .article-section h3 { font-size: 1.1rem; font-weight: 700; margin: 20px 0 10px; }
+    .article-section p  { color: var(--text-secondary); line-height: 1.8; margin-bottom: 12px; }
+    .article-section ul { color: var(--text-secondary); line-height: 1.8; margin-left: 20px; margin-bottom: 12px; }
+    .article-section ul li { margin-bottom: 6px; }
+    .key-term { background: var(--primary-light); color: var(--primary); padding: 1px 6px; border-radius: 4px; font-weight: 600; font-size: 0.9em; }
+    /* SIP Calculator */
+    #sip-calculator .calc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .result-box {
+      background: linear-gradient(135deg, var(--primary), #0e9f6e);
+      color: white; border-radius: var(--radius); padding: 28px; text-align: center;
+    }
+    .result-value { font-size: 2.5rem; font-weight: 800; }
+    .result-label { opacity: .8; font-size: 0.88rem; margin-top: 4px; }
+    .result-row { display: flex; justify-content: space-between; margin-top: 16px; opacity: .85; font-size: 0.88rem; border-top: 1px solid rgba(255,255,255,.2); padding-top: 14px; }
+    /* Glossary */
+    .glossary-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .glossary-item:last-child { border-bottom: none; }
+    .glossary-term { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+    .glossary-def { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
+    /* FAQ */
+    .faq-item { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; }
+    .faq-question {
+      padding: 16px 20px; cursor: pointer; font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background var(--transition);
+    }
+    .faq-question:hover { background: var(--bg-page); }
+    .faq-answer { display: none; padding: 0 20px 16px; color: var(--text-secondary); line-height: 1.7; font-size: 0.9rem; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform var(--transition); font-size: 1.2rem; }
+    @media (max-width: 900px) {
+      .learn-grid { grid-template-columns: 1fr; }
+      .learn-sidebar { position: static; }
+      #sip-calculator .calc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-icon" aria-hidden="true">📈</span>
+      <span>MF Dashboard</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+      <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+      <li><a href="research-portals.html">🔬 Research</a></li>
+      <li><a href="learn.html" aria-current="page">📚 Learn</a></li>
+      <li><a href="about.html">ℹ️ About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button id="hamburger" class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="mobileNav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <ul role="list">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+    <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+    <li><a href="research-portals.html">🔬 Research</a></li>
+    <li><a href="learn.html">📚 Learn</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+  </ul>
+</div>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<header class="page-hero">
+  <div class="container">
+    <h1>Learn Mutual Fund Investing</h1>
+    <p>From beginner basics to advanced strategies — everything you need to know about investing in Indian mutual funds.</p>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="section">
+    <div class="container">
+      <div class="learn-grid">
+
+        <!-- Sidebar TOC -->
+        <aside class="learn-sidebar" aria-label="Table of contents">
+          <h3>Contents</h3>
+          <ul role="list">
+            <li><a href="#what-is-mf">What is a Mutual Fund?</a></li>
+            <li><a href="#how-sip-works">How SIP Works</a></li>
+            <li><a href="#equity">Equity Funds</a></li>
+            <li><a href="#debt">Debt Funds</a></li>
+            <li><a href="#hybrid">Hybrid Funds</a></li>
+            <li><a href="#sip-calculator">SIP Calculator</a></li>
+            <li><a href="#tax">Taxation</a></li>
+            <li><a href="#tips">Investing Tips</a></li>
+            <li><a href="#glossary">Glossary</a></li>
+            <li><a href="#faq">FAQs</a></li>
+          </ul>
+        </aside>
+
+        <!-- Main content -->
+        <div>
+
+          <!-- What is a MF -->
+          <article class="article-section" id="what-is-mf">
+            <h2>📖 What is a Mutual Fund?</h2>
+            <p>A <span class="key-term">mutual fund</span> is a professionally managed investment vehicle that pools money from many investors to purchase a diversified portfolio of securities such as stocks, bonds, and other assets.</p>
+            <p>When you invest in a mutual fund, you buy <span class="key-term">units</span> of the fund. Each unit's price is called the <span class="key-term">Net Asset Value (NAV)</span> and is calculated daily after market hours.</p>
+            <h3>Key Benefits</h3>
+            <ul>
+              <li><strong>Diversification:</strong> Spread risk across many securities automatically.</li>
+              <li><strong>Professional Management:</strong> Expert fund managers handle stock selection.</li>
+              <li><strong>Liquidity:</strong> Redeem units any business day at current NAV (for open-ended funds).</li>
+              <li><strong>Affordability:</strong> Start with as little as ₹100 via SIP.</li>
+              <li><strong>Transparency:</strong> Regulated by SEBI with mandatory disclosures.</li>
+            </ul>
+          </article>
+
+          <!-- How SIP Works -->
+          <article class="article-section" id="how-sip-works">
+            <h2>🔄 How SIP Works</h2>
+            <p>A <span class="key-term">Systematic Investment Plan (SIP)</span> allows you to invest a fixed amount regularly (monthly, weekly) into a mutual fund. It is the most recommended way to invest in equity funds.</p>
+            <h3>Benefits of SIP</h3>
+            <ul>
+              <li><strong>Rupee Cost Averaging:</strong> You buy more units when prices are low and fewer when prices are high, averaging out the cost over time.</li>
+              <li><strong>Compounding:</strong> Returns on returns — the earlier you start, the more powerful compounding becomes.</li>
+              <li><strong>Discipline:</strong> Automatic debit forces regular saving habits.</li>
+              <li><strong>Flexibility:</strong> Start, stop, pause or increase your SIP any time.</li>
+            </ul>
+            <div class="alert alert-success mt-4">
+              <span aria-hidden="true">💡</span>
+              <div><strong>Pro Tip:</strong> A ₹5,000/month SIP in a fund returning 15% CAGR for 20 years grows to approximately <strong>₹75 lakhs</strong> — against a total investment of only ₹12 lakhs!</div>
+            </div>
+          </article>
+
+          <!-- Equity -->
+          <article class="article-section" id="equity">
+            <h2>📈 Equity Funds</h2>
+            <p>Equity funds invest predominantly (≥65%) in stocks. They are suitable for <strong>long-term wealth creation</strong> (5+ year horizon) and carry <strong>moderate to high risk</strong>.</p>
+            <h3>Types of Equity Funds</h3>
+            <ul>
+              <li><strong>Large Cap:</strong> Top 100 stocks by market cap. More stable, less volatile.</li>
+              <li><strong>Mid Cap:</strong> Ranks 101–250. Higher growth potential, higher volatility.</li>
+              <li><strong>Small Cap:</strong> Rank 251 onward. Highest return potential, highest risk.</li>
+              <li><strong>Multi / Flexi Cap:</strong> Invests across all market caps. Fund manager discretion.</li>
+              <li><strong>ELSS:</strong> Tax saving under Sec 80C. Mandatory 3-year lock-in.</li>
+              <li><strong>Thematic / Sectoral:</strong> Focused on specific sectors like IT, pharma, banking. Very high risk.</li>
+            </ul>
+            <a href="equity-funds.html" class="btn btn-primary">Explore Equity Funds →</a>
+          </article>
+
+          <!-- Debt -->
+          <article class="article-section" id="debt">
+            <h2>🏦 Debt Funds</h2>
+            <p>Debt funds invest in fixed income instruments — government bonds, corporate bonds, Treasury bills, and money market instruments. They are suitable for <strong>short to medium-term goals</strong> with low to moderate risk.</p>
+            <h3>Types of Debt Funds</h3>
+            <ul>
+              <li><strong>Liquid Funds:</strong> Invest in instruments maturing in up to 91 days. Ideal for emergency funds.</li>
+              <li><strong>Short Duration:</strong> Portfolio duration 1–3 years. Stable returns, low risk.</li>
+              <li><strong>Corporate Bond:</strong> Invest mainly in AA+ rated corporate bonds. Slightly higher returns.</li>
+              <li><strong>Gilt Funds:</strong> Only government securities. No credit risk, but interest rate risk.</li>
+              <li><strong>Dynamic Bond:</strong> Actively managed duration. Risk varies.</li>
+            </ul>
+            <a href="debt-funds.html" class="btn btn-primary">Explore Debt Funds →</a>
+          </article>
+
+          <!-- Hybrid -->
+          <article class="article-section" id="hybrid">
+            <h2>⚖️ Hybrid Funds</h2>
+            <p>Hybrid funds invest in a mix of equity and debt, offering a balance between growth and stability. They are ideal for investors who want a <strong>single-fund diversified portfolio</strong>.</p>
+            <ul>
+              <li><strong>Aggressive Hybrid:</strong> 65–80% equity, 20–35% debt.</li>
+              <li><strong>Balanced Advantage (BAF):</strong> Dynamically adjusts equity/debt allocation based on market valuations.</li>
+              <li><strong>Conservative Hybrid:</strong> 10–25% equity, 75–90% debt.</li>
+              <li><strong>Index / ETF:</strong> Passively tracks an index like Nifty 50. Very low expense ratios.</li>
+            </ul>
+          </article>
+
+          <!-- SIP Calculator -->
+          <article class="article-section" id="sip-calculator">
+            <h2>🧮 SIP Calculator</h2>
+            <p>Estimate the future value of your SIP investment. Results are indicative and assume constant returns.</p>
+            <div class="card mt-4">
+              <div class="card-body">
+                <div class="calc-grid" id="sip-calculator">
+                  <div style="display:flex;flex-direction:column;gap:18px">
+                    <div class="form-group">
+                      <label class="form-label" for="sipAmount">Monthly SIP Amount (₹)</label>
+                      <input type="number" id="sipAmount" class="form-control" value="5000" min="100" step="500" oninput="calcSip()" aria-label="Monthly SIP Amount" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="sipRate">Expected Annual Return (%)</label>
+                      <input type="number" id="sipRate" class="form-control" value="12" min="1" max="30" step="0.5" oninput="calcSip()" aria-label="Expected Annual Return" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="sipYears">Investment Duration (years)</label>
+                      <input type="number" id="sipYears" class="form-control" value="10" min="1" max="40" oninput="calcSip()" aria-label="Investment Duration" />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="result-box" id="sipResult" aria-live="polite" aria-label="SIP calculation results">
+                      <div class="result-value" id="sipTotal">₹23.2L</div>
+                      <div class="result-label">Estimated Corpus</div>
+                      <div class="result-row">
+                        <span>Total Invested</span>
+                        <span id="sipInvested">₹6.0L</span>
+                      </div>
+                      <div class="result-row">
+                        <span>Estimated Returns</span>
+                        <span id="sipReturns">₹17.2L</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Taxation -->
+          <article class="article-section" id="tax">
+            <h2>💰 Taxation of Mutual Funds</h2>
+            <h3>Equity Funds (≥65% in stocks)</h3>
+            <ul>
+              <li><strong>STCG (Short Term Capital Gains):</strong> Held &lt; 1 year → taxed at <strong>20%</strong></li>
+              <li><strong>LTCG (Long Term Capital Gains):</strong> Held ≥ 1 year → gains above ₹1.25 lakh taxed at <strong>12.5%</strong> (no indexation)</li>
+              <li><strong>Dividends:</strong> Added to income and taxed at slab rate</li>
+            </ul>
+            <h3>Debt Funds (from 1 Apr 2023)</h3>
+            <ul>
+              <li>All gains (regardless of holding period) are added to income and taxed at <strong>your income tax slab rate</strong></li>
+              <li>No indexation benefit for debt funds purchased after 31 Mar 2023</li>
+            </ul>
+            <h3>ELSS Funds</h3>
+            <ul>
+              <li>Investment up to ₹1.5 lakh deductible under <strong>Section 80C</strong></li>
+              <li>LTCG rules apply (same as equity) after 3-year lock-in</li>
+            </ul>
+            <div class="alert alert-warning mt-4">
+              <span aria-hidden="true">⚠️</span>
+              <span>Tax rules may change. Always consult a qualified tax advisor for your specific situation.</span>
+            </div>
+          </article>
+
+          <!-- Tips -->
+          <article class="article-section" id="tips">
+            <h2>✅ Smart Investing Tips</h2>
+            <ul>
+              <li><strong>Start early:</strong> Time in market beats timing the market.</li>
+              <li><strong>Stay invested:</strong> Avoid panic selling during market corrections.</li>
+              <li><strong>Invest regularly:</strong> SIP builds discipline and averages cost.</li>
+              <li><strong>Diversify:</strong> Don't put all eggs in one basket — spread across categories.</li>
+              <li><strong>Review annually:</strong> Rebalance your portfolio once a year.</li>
+              <li><strong>Choose Direct plans:</strong> Direct plans have lower expense ratios — more returns over time.</li>
+              <li><strong>Ignore short-term noise:</strong> Focus on 3–5 year returns, not 3-month performance.</li>
+              <li><strong>Understand before investing:</strong> Read the Scheme Information Document (SID).</li>
+              <li><strong>Know your risk:</strong> Match fund risk to your personal risk tolerance and goal horizon.</li>
+            </ul>
+          </article>
+
+          <!-- Glossary -->
+          <article class="article-section" id="glossary">
+            <h2>📖 Glossary</h2>
+            <div class="card">
+              <div class="card-body" style="padding:0">
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">NAV (Net Asset Value)</div>
+                  <div class="glossary-def">The price per unit of a mutual fund scheme, calculated daily after market close. NAV = (Total Assets − Liabilities) ÷ Number of Units.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">AUM (Assets Under Management)</div>
+                  <div class="glossary-def">The total market value of assets managed by a fund. Higher AUM generally indicates investor trust but may impact liquidity for small-cap funds.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">Expense Ratio</div>
+                  <div class="glossary-def">Annual fee charged by the fund as a percentage of AUM. Includes management fees, admin costs. Lower is better. SEBI caps TER.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">SIP (Systematic Investment Plan)</div>
+                  <div class="glossary-def">A method of investing fixed amounts at regular intervals. Benefits from rupee-cost averaging and compounding.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">CAGR (Compound Annual Growth Rate)</div>
+                  <div class="glossary-def">The annual rate of return that would be required for an investment to grow from beginning to end value. Used to compare fund performance.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">ELSS (Equity Linked Savings Scheme)</div>
+                  <div class="glossary-def">Tax-saving equity fund with 3-year lock-in. Eligible for ₹1.5 lakh deduction under Section 80C of the Income Tax Act.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">Exit Load</div>
+                  <div class="glossary-def">A fee charged when you redeem units before a specified period. Most equity funds charge 1% if redeemed within 1 year.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">Fund Manager</div>
+                  <div class="glossary-def">A professional who manages the portfolio of a mutual fund scheme, making buy/sell decisions based on the fund's mandate and objective.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">Benchmark</div>
+                  <div class="glossary-def">An index (e.g., Nifty 50, BSE Sensex) used to evaluate a fund's performance. A good fund should consistently beat its benchmark.</div>
+                </div>
+                <div class="glossary-item" style="padding:16px">
+                  <div class="glossary-term">Alpha</div>
+                  <div class="glossary-def">The excess return generated by a fund over its benchmark. Positive alpha means the fund outperformed; negative means it underperformed.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- FAQs -->
+          <article class="article-section" id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-list">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                  Is it safe to invest in mutual funds?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </div>
+                <div class="faq-answer">Mutual funds are regulated by SEBI and are generally safe vehicles for investing. However, they are subject to market risk — your returns depend on how the underlying securities perform. Equity funds can lose value in the short term.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                  What is the minimum amount to start investing?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </div>
+                <div class="faq-answer">Many funds allow SIP investments starting from ₹100–500 per month. Some index funds like Navi Nifty 50 allow SIP from just ₹10. There is no maximum limit.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                  Direct plan vs Regular plan — which should I choose?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </div>
+                <div class="faq-answer">Direct plans have lower expense ratios (no distributor commission), resulting in higher returns over time. For example, a 0.5% difference in expense ratio can mean lakhs more corpus over 20 years. If you are comfortable investing directly, always choose direct plans.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                  How many mutual funds should I own?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </div>
+                <div class="faq-answer">For most investors, 3–5 funds are sufficient for a well-diversified portfolio. More funds add complexity without necessarily adding diversification. A typical portfolio might include 1–2 large cap, 1 mid/small cap, 1 debt, and optionally 1 ELSS fund.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                  When should I stop a SIP?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </div>
+                <div class="faq-answer">Stop a SIP only when your financial goal is achieved, or if the fund consistently underperforms its benchmark and peers for 3+ years. Do not stop during market downturns — that is actually when SIP is most beneficial (you buy more units at lower prices).</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <span class="brand-icon" aria-hidden="true">📈</span>
+          <span style="color:white">MF Dashboard</span>
+        </a>
+        <p>India's comprehensive mutual fund tracking and comparison platform.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fund Categories</h4>
+        <ul role="list">
+          <li><a href="equity-funds.html">Equity Funds</a></li>
+          <li><a href="debt-funds.html">Debt Funds</a></li>
+          <li><a href="debt-funds.html#hybrid">Hybrid Funds</a></li>
+          <li><a href="equity-funds.html#elss">ELSS / Tax Saving</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul role="list">
+          <li><a href="research-portals.html">Research Portals</a></li>
+          <li><a href="learn.html">Learn Investing</a></li>
+          <li><a href="learn.html#sip-calculator">SIP Calculator</a></li>
+          <li><a href="learn.html#glossary">Glossary</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul role="list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="about.html#disclaimer">Disclaimer</a></li>
+          <li><a href="about.html#privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MF Dashboard. For educational purposes only.</span>
+      <div class="footer-bottom-links">
+        <a href="about.html#disclaimer">Disclaimer</a>
+        <a href="about.html#privacy">Privacy</a>
+        <a href="about.html#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  /* SIP Calculator */
+  function calcSip() {
+    var P = parseFloat(document.getElementById('sipAmount').value) || 0;
+    var r = (parseFloat(document.getElementById('sipRate').value) || 0) / 100 / 12;
+    var n = (parseInt(document.getElementById('sipYears').value) || 0) * 12;
+    if (r === 0 || n === 0) return;
+    var fv = P * (Math.pow(1 + r, n) - 1) / r * (1 + r);
+    var invested = P * n;
+    var returns = fv - invested;
+
+    function fmt(v) {
+      if (v >= 10000000) return '₹' + (v / 10000000).toFixed(2) + ' Cr';
+      if (v >= 100000)   return '₹' + (v / 100000).toFixed(2) + ' L';
+      return '₹' + Math.round(v).toLocaleString('en-IN');
+    }
+
+    document.getElementById('sipTotal').textContent    = fmt(fv);
+    document.getElementById('sipInvested').textContent = fmt(invested);
+    document.getElementById('sipReturns').textContent  = fmt(returns);
+  }
+
+  /* FAQ toggle */
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var isOpen = item.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  }
+  document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(this); }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () { calcSip(); });
+</script>
+</body>
+</html>

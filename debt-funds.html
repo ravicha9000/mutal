@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debt &amp; Hybrid Funds — India Mutual Fund Dashboard</title>
+  <meta name="description" content="Compare India's top debt and hybrid mutual funds — liquid, short duration, corporate bond, gilt, balanced advantage and index funds." />
+  <meta name="keywords" content="debt mutual fund India, liquid fund, corporate bond fund, gilt fund, hybrid fund, balanced advantage fund" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+
+<!-- ── Navigation ────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-icon" aria-hidden="true">📈</span>
+      <span>MF Dashboard</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+      <li><a href="debt-funds.html" aria-current="page">🏦 Debt &amp; Hybrid</a></li>
+      <li><a href="research-portals.html">🔬 Research</a></li>
+      <li><a href="learn.html">📚 Learn</a></li>
+      <li><a href="about.html">ℹ️ About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button id="hamburger" class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="mobileNav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <ul role="list">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+    <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+    <li><a href="research-portals.html">🔬 Research</a></li>
+    <li><a href="learn.html">📚 Learn</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+  </ul>
+</div>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<header class="page-hero">
+  <div class="container">
+    <h1>Debt &amp; Hybrid Funds</h1>
+    <p>Explore stable debt funds and balanced hybrid funds for diversified, risk-managed investing. Ideal for conservative to moderate risk profiles.</p>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Stats -->
+  <section class="section" aria-labelledby="debt-stats-heading">
+    <div class="container">
+      <h2 class="sr-only" id="debt-stats-heading">Debt and Hybrid Fund Statistics</h2>
+      <div class="stats-grid fade-in">
+        <article class="stat-card">
+          <div class="stat-label">Liquid Fund Avg 1Y</div>
+          <div class="stat-value">6.7%</div>
+          <div class="stat-change up">▲ Better than savings</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Short Duration Avg 1Y</div>
+          <div class="stat-value">7.3%</div>
+          <div class="stat-change up">▲ Low volatility</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Balanced Advantage Avg 5Y</div>
+          <div class="stat-value">15.2%</div>
+          <div class="stat-change up">▲ Moderate risk-return</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Index / ETF Avg 1Y</div>
+          <div class="stat-value">20.3%</div>
+          <div class="stat-change up">▲ Low expense ratio</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Debt Funds Section -->
+  <section class="section" style="padding-top:0" aria-labelledby="debt-section-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="debt-section-heading">🏦 Debt Funds</h2>
+        <p class="section-subtitle">Fixed income instruments — ideal for short to medium-term goals</p>
+      </div>
+
+      <!-- Debt Filters -->
+      <div class="filters-bar fade-in" role="search" aria-label="Debt fund filters">
+        <div class="filters-row">
+          <div class="form-group search">
+            <label class="form-label" for="searchInputDebt">Search debt funds</label>
+            <div class="search-wrapper">
+              <span class="search-icon" aria-hidden="true">🔍</span>
+              <input id="searchInputDebt" type="search" class="form-control" placeholder="Search debt funds…" oninput="filterDebt(this.value)" aria-label="Search debt funds" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="debtSubcat">Sub-category</label>
+            <select id="debtSubcat" class="form-control" onchange="filterDebtBySubcat(this.value)" aria-label="Filter debt by sub-category">
+              <option value="">All Debt</option>
+              <option value="Liquid">Liquid</option>
+              <option value="Short Duration">Short Duration</option>
+              <option value="Corporate Bond">Corporate Bond</option>
+              <option value="Gilt">Gilt</option>
+            </select>
+          </div>
+          <div class="filters-actions">
+            <button onclick="resetDebtFilters()" class="btn btn-outline btn-sm">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in" id="debtTable" role="region" aria-live="polite" aria-label="Debt funds list"></div>
+      <div id="debtPagination"></div>
+    </div>
+  </section>
+
+  <!-- Hybrid Funds Section -->
+  <section class="section" id="hybrid" aria-labelledby="hybrid-section-heading" style="background:var(--bg-card);border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="hybrid-section-heading">⚖️ Hybrid Funds</h2>
+        <p class="section-subtitle">Best of both worlds — equity growth with debt stability</p>
+      </div>
+
+      <!-- Hybrid Filters -->
+      <div class="filters-bar fade-in" role="search" aria-label="Hybrid fund filters">
+        <div class="filters-row">
+          <div class="form-group search">
+            <label class="form-label" for="searchInputHybrid">Search hybrid funds</label>
+            <div class="search-wrapper">
+              <span class="search-icon" aria-hidden="true">🔍</span>
+              <input id="searchInputHybrid" type="search" class="form-control" placeholder="Search hybrid funds…" oninput="filterHybrid(this.value)" aria-label="Search hybrid funds" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="hybridSubcat">Sub-category</label>
+            <select id="hybridSubcat" class="form-control" onchange="filterHybridBySubcat(this.value)" aria-label="Filter hybrid by sub-category">
+              <option value="">All Hybrid</option>
+              <option value="Dynamic Asset">Dynamic Asset</option>
+              <option value="Aggressive">Aggressive</option>
+              <option value="Index/ETF">Index/ETF</option>
+            </select>
+          </div>
+          <div class="filters-actions">
+            <button onclick="resetHybridFilters()" class="btn btn-outline btn-sm">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in" id="hybridTable" role="region" aria-live="polite" aria-label="Hybrid funds list"></div>
+      <div id="hybridPagination"></div>
+
+      <!-- Educational -->
+      <div class="alert alert-info mt-4 fade-in" role="note">
+        <span aria-hidden="true">💡</span>
+        <div>
+          <strong>Tip:</strong> Hybrid funds automatically rebalance between equity and debt, making them suitable for investors who want a ready-made diversified portfolio without managing multiple funds.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison of types -->
+  <section class="section" aria-labelledby="comparison-types-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="comparison-types-heading">Debt vs Hybrid — Quick Comparison</h2>
+      </div>
+      <div class="grid-2 fade-in">
+        <div class="card">
+          <div class="card-header"><strong>🏦 Debt Funds</strong></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+              <li>✅ Lower risk than equity</li>
+              <li>✅ Stable, predictable returns (6–9%)</li>
+              <li>✅ Suitable for 1–3 year goals</li>
+              <li>✅ Better than FD post-tax for higher brackets</li>
+              <li>⚠️ Interest rate risk for long-duration funds</li>
+              <li>⚠️ Returns not guaranteed</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><strong>⚖️ Hybrid Funds</strong></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+              <li>✅ Auto-rebalancing between equity &amp; debt</li>
+              <li>✅ Moderate risk, moderate returns (12–18%)</li>
+              <li>✅ Suitable for 3–5 year goals</li>
+              <li>✅ Single fund diversification</li>
+              <li>⚠️ Equity portion carries market risk</li>
+              <li>⚠️ Expense ratios can be higher</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Comparison Bar -->
+<aside id="comparisonBar" class="comparison-bar hidden" aria-label="Fund comparison">
+  <div class="container">
+    <span class="compare-label">Compare (<span id="compareCount">0</span>):</span>
+    <div class="comparison-items" id="comparisonChips"></div>
+    <button onclick="window.openCompareModal()" class="btn btn-primary btn-sm">Compare Now</button>
+  </div>
+</aside>
+
+<!-- Comparison Modal -->
+<div id="compareModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="compareModalTitle">Fund Comparison</h3>
+      <button class="modal-close" onclick="window.closeCompareModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="compareTableBody"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <span class="brand-icon" aria-hidden="true">📈</span>
+          <span style="color:white">MF Dashboard</span>
+        </a>
+        <p>India's comprehensive mutual fund tracking and comparison platform.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fund Categories</h4>
+        <ul role="list">
+          <li><a href="equity-funds.html">Equity Funds</a></li>
+          <li><a href="debt-funds.html">Debt Funds</a></li>
+          <li><a href="debt-funds.html#hybrid">Hybrid Funds</a></li>
+          <li><a href="equity-funds.html#elss">ELSS / Tax Saving</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul role="list">
+          <li><a href="research-portals.html">Research Portals</a></li>
+          <li><a href="learn.html">Learn Investing</a></li>
+          <li><a href="learn.html#sip-calculator">SIP Calculator</a></li>
+          <li><a href="learn.html#glossary">Glossary</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul role="list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="about.html#disclaimer">Disclaimer</a></li>
+          <li><a href="about.html#privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MF Dashboard. For educational purposes only.</span>
+      <div class="footer-bottom-links">
+        <a href="about.html#disclaimer">Disclaimer</a>
+        <a href="about.html#privacy">Privacy</a>
+        <a href="about.html#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script>
+  var debtSearch = '', debtSubcat = '';
+  var hybridSearch = '', hybridSubcat = '';
+
+  function filterDebt(q) { debtSearch = q; loadDebt(); }
+  function filterDebtBySubcat(v) { debtSubcat = v; loadDebt(); }
+  function resetDebtFilters() {
+    debtSearch = ''; debtSubcat = '';
+    document.getElementById('searchInputDebt').value = '';
+    document.getElementById('debtSubcat').value = '';
+    loadDebt();
+  }
+
+  function filterHybrid(q) { hybridSearch = q; loadHybrid(); }
+  function filterHybridBySubcat(v) { hybridSubcat = v; loadHybrid(); }
+  function resetHybridFilters() {
+    hybridSearch = ''; hybridSubcat = '';
+    document.getElementById('searchInputHybrid').value = '';
+    document.getElementById('hybridSubcat').value = '';
+    loadHybrid();
+  }
+
+  function loadDebt() {
+    window.MFDashboard._state.filters.category = 'Debt';
+    window.MFDashboard._state.filters.subcat = debtSubcat;
+    window.MFDashboard._state.filters.search = debtSearch;
+    window.MFDashboard._state.page = 1;
+    window.MFDashboard.init('debtTable', { category: 'Debt', subcat: debtSubcat });
+    // Override pagination container
+    var p = document.getElementById('pagination');
+    var dp = document.getElementById('debtPagination');
+    if (p && dp) { dp.innerHTML = p.innerHTML; p.innerHTML = ''; }
+  }
+
+  function loadHybrid() {
+    window.MFDashboard._state.filters.category = 'Hybrid';
+    window.MFDashboard._state.filters.subcat = hybridSubcat;
+    window.MFDashboard._state.filters.search = hybridSearch;
+    window.MFDashboard._state.page = 1;
+    window.MFDashboard.init('hybridTable', { category: 'Hybrid', subcat: hybridSubcat });
+    var p = document.getElementById('pagination');
+    var hp = document.getElementById('hybridPagination');
+    if (p && hp) { hp.innerHTML = p.innerHTML; p.innerHTML = ''; }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadDebt();
+    loadHybrid();
+    if (window.location.hash === '#hybrid') {
+      document.getElementById('hybrid').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
+</body>
+</html>

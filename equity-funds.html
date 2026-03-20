@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equity Funds — India Mutual Fund Dashboard</title>
+  <meta name="description" content="Compare India's top equity mutual funds — large cap, mid cap, small cap, ELSS, flexi cap and sectoral funds with 1Y, 3Y and 5Y returns." />
+  <meta name="keywords" content="equity mutual fund India, large cap fund, mid cap fund, small cap fund, ELSS, SIP equity" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+
+<!-- ── Navigation ────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-icon" aria-hidden="true">📈</span>
+      <span>MF Dashboard</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="equity-funds.html" aria-current="page">📊 Equity Funds</a></li>
+      <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+      <li><a href="research-portals.html">🔬 Research</a></li>
+      <li><a href="learn.html">📚 Learn</a></li>
+      <li><a href="about.html">ℹ️ About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button id="hamburger" class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="mobileNav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <ul role="list">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+    <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+    <li><a href="research-portals.html">🔬 Research</a></li>
+    <li><a href="learn.html">📚 Learn</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+  </ul>
+</div>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<header class="page-hero">
+  <div class="container">
+    <h1>Equity Mutual Funds</h1>
+    <p>Explore India's best performing equity funds. Filter by sub-category, risk level and ratings to find the perfect match for your portfolio.</p>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Stats -->
+  <section class="section" aria-labelledby="equity-stats-heading">
+    <div class="container">
+      <h2 class="sr-only" id="equity-stats-heading">Equity Fund Statistics</h2>
+      <div class="stats-grid fade-in">
+        <article class="stat-card">
+          <div class="stat-label">Large Cap Avg 5Y</div>
+          <div class="stat-value">16.7%</div>
+          <div class="stat-change up">▲ Consistent performers</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Mid Cap Avg 5Y</div>
+          <div class="stat-value">26.2%</div>
+          <div class="stat-change up">▲ High growth potential</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Small Cap Avg 5Y</div>
+          <div class="stat-value">36.9%</div>
+          <div class="stat-change up">▲ Highest return potential</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">ELSS Tax Saving</div>
+          <div class="stat-value">₹1.5L</div>
+          <div class="stat-change up">▲ Sec 80C deduction</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="tabs" role="tablist" aria-label="Equity fund sub-categories">
+        <button class="tab-btn active" role="tab" aria-selected="true"  aria-controls="tab-all"     id="btn-all"     onclick="switchTab('all')">All Equity</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-largecap" id="btn-largecap" onclick="switchTab('largecap')">Large Cap</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-midcap"   id="btn-midcap"   onclick="switchTab('midcap')">Mid Cap</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-smallcap" id="btn-smallcap" onclick="switchTab('smallcap')">Small Cap</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-elss"     id="btn-elss"     id="elss" onclick="switchTab('elss')">ELSS</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-flexi"    id="btn-flexi"    onclick="switchTab('flexi')">Flexi Cap</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-sectoral" id="btn-sectoral" onclick="switchTab('sectoral')">Sectoral</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-bar fade-in" role="search" aria-label="Equity fund filters">
+        <div class="filters-row">
+          <div class="form-group search">
+            <label class="form-label" for="searchInput">Search</label>
+            <div class="search-wrapper">
+              <span class="search-icon" aria-hidden="true">🔍</span>
+              <input id="searchInput" type="search" class="form-control filter-input" placeholder="Search equity funds…" aria-label="Search equity funds" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="riskFilter">Risk Level</label>
+            <select id="riskFilter" class="form-control filter-select" aria-label="Filter by risk">
+              <option value="">All Risks</option>
+              <option value="Low">Low</option>
+              <option value="Moderate">Moderate</option>
+              <option value="High">High</option>
+              <option value="Very High">Very High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ratingFilter">Min Rating</label>
+            <select id="ratingFilter" class="form-control filter-select" aria-label="Filter by rating">
+              <option value="">Any</option>
+              <option value="4">4★ &amp; above</option>
+              <option value="5">5★ only</option>
+            </select>
+          </div>
+          <div class="filters-actions">
+            <button id="resetFilters" class="btn btn-outline btn-sm">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="fade-in" id="equityTable" role="region" aria-live="polite" aria-label="Equity funds list"></div>
+      <div id="pagination"></div>
+
+      <!-- Disclaimer -->
+      <div class="alert alert-warning mt-4 fade-in" role="note">
+        <span aria-hidden="true">⚠️</span>
+        <span>Equity fund returns are subject to market volatility. Returns shown are CAGR. Past performance does not guarantee future results.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational snippet -->
+  <section class="section" style="background:var(--bg-card);border-top:1px solid var(--border)" aria-labelledby="equity-learn-heading">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <h2 id="equity-learn-heading" style="font-size:1.4rem;font-weight:800;margin-bottom:16px">What are Equity Mutual Funds?</h2>
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">Equity mutual funds invest primarily in stocks and shares of companies. They aim to generate wealth over the long term by participating in the growth of businesses.</p>
+          <p style="color:var(--text-secondary);line-height:1.8">They are best suited for investors with a time horizon of <strong>5+ years</strong> and moderate to high risk appetite.</p>
+          <a href="learn.html#equity" class="btn btn-primary mt-4">Learn More →</a>
+        </div>
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">Equity Fund Types</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--primary);font-size:1.2rem">📌</span><div><strong>Large Cap:</strong> Top 100 companies by market cap. Lower risk, steady returns.</div></li>
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--primary);font-size:1.2rem">📌</span><div><strong>Mid Cap:</strong> 101–250th companies. Higher growth, higher volatility.</div></li>
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--primary);font-size:1.2rem">📌</span><div><strong>Small Cap:</strong> 251st company onward. Highest return potential, highest risk.</div></li>
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--primary);font-size:1.2rem">📌</span><div><strong>ELSS:</strong> Tax saving under Sec 80C. 3-year lock-in.</div></li>
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--primary);font-size:1.2rem">📌</span><div><strong>Flexi Cap:</strong> Invests across all market caps. Flexible allocation.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Comparison Bar -->
+<aside id="comparisonBar" class="comparison-bar hidden" aria-label="Fund comparison">
+  <div class="container">
+    <span class="compare-label">Compare (<span id="compareCount">0</span>):</span>
+    <div class="comparison-items" id="comparisonChips"></div>
+    <button onclick="window.openCompareModal()" class="btn btn-primary btn-sm">Compare Now</button>
+  </div>
+</aside>
+
+<!-- Comparison Modal -->
+<div id="compareModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="compareModalTitle">Fund Comparison</h3>
+      <button class="modal-close" onclick="window.closeCompareModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="compareTableBody"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <span class="brand-icon" aria-hidden="true">📈</span>
+          <span style="color:white">MF Dashboard</span>
+        </a>
+        <p>India's comprehensive mutual fund tracking and comparison platform.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fund Categories</h4>
+        <ul role="list">
+          <li><a href="equity-funds.html">Equity Funds</a></li>
+          <li><a href="debt-funds.html">Debt Funds</a></li>
+          <li><a href="debt-funds.html#hybrid">Hybrid Funds</a></li>
+          <li><a href="equity-funds.html#elss">ELSS / Tax Saving</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul role="list">
+          <li><a href="research-portals.html">Research Portals</a></li>
+          <li><a href="learn.html">Learn Investing</a></li>
+          <li><a href="learn.html#sip-calculator">SIP Calculator</a></li>
+          <li><a href="learn.html#glossary">Glossary</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul role="list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="about.html#disclaimer">Disclaimer</a></li>
+          <li><a href="about.html#privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MF Dashboard. For educational purposes only.</span>
+      <div class="footer-bottom-links">
+        <a href="about.html#disclaimer">Disclaimer</a>
+        <a href="about.html#privacy">Privacy</a>
+        <a href="about.html#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script>
+  var subcatMap = {
+    all: '',
+    largecap: 'Large Cap',
+    midcap: 'Mid Cap',
+    smallcap: 'Small Cap',
+    elss: 'ELSS',
+    flexi: 'Flexi Cap',
+    sectoral: 'Sectoral'
+  };
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    });
+    var activeBtn = document.getElementById('btn-' + tab);
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+      activeBtn.setAttribute('aria-selected', 'true');
+    }
+    // Update subcatFilter
+    var subcatEl = document.getElementById('subcatFilter');
+    if (!subcatEl) {
+      // Create a hidden subcat filter
+      var hiddenEl = document.createElement('input');
+      hiddenEl.type = 'hidden';
+      hiddenEl.id = 'subcatFilter';
+      document.body.appendChild(hiddenEl);
+    }
+    // Update state directly
+    if (window.MFDashboard && window.MFDashboard._state) {
+      window.MFDashboard._state.filters.subcat = subcatMap[tab] || '';
+      window.MFDashboard._state.page = 1;
+    }
+    window.MFDashboard.init('equityTable', { category: 'Equity', subcat: subcatMap[tab] || '' });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Check URL hash for ELSS anchor
+    if (window.location.hash === '#elss') switchTab('elss');
+    else window.MFDashboard.init('equityTable', { category: 'Equity' });
+  });
+</script>
+</body>
+</html>
