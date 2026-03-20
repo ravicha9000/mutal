@@ -302,6 +302,15 @@
 
   window.removeCompare = function (id) { toggleCompare(id); };
 
+  window.clearComparison = function () {
+    state.compareList = [];
+    updateComparisonBar();
+    ['fundTable', 'equityTable', 'debtTable', 'hybridTable'].forEach(function (tid) {
+      var el = document.getElementById(tid);
+      if (el) renderFundTable(tid, state.filters.category || null);
+    });
+  };
+
   window.openCompareModal = function () {
     if (state.compareList.length < 2) {
       window.showToast && window.showToast('Select at least 2 funds to compare', 'warning');
