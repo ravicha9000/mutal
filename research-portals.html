@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Portals &amp; Resources — India Mutual Fund Dashboard</title>
+  <meta name="description" content="Essential research portals, SEBI tools, AMC websites and analytical resources for Indian mutual fund investors." />
+  <meta name="keywords" content="mutual fund research India, SEBI, AMFI, Value Research, Morningstar India, moneycontrol mutual fund" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <style>
+    .portal-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .portal-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      transition: all var(--transition); position: relative; overflow: hidden;
+    }
+    .portal-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--primary); transform: scaleX(0); transition: transform .3s ease;
+    }
+    .portal-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .portal-card:hover::after { transform: scaleX(1); }
+    .portal-icon { font-size: 2.5rem; margin-bottom: 14px; }
+    .portal-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
+    .portal-desc { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; margin-bottom: 14px; }
+    .portal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tool-row {
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 16px; padding: 16px; border-bottom: 1px solid var(--border);
+      align-items: center; transition: background var(--transition);
+    }
+    .tool-row:last-child { border-bottom: none; }
+    .tool-row:hover { background: var(--bg-page); }
+    .tool-icon { font-size: 1.6rem; width: 44px; text-align: center; }
+    .tool-name { font-weight: 600; margin-bottom: 2px; }
+    .tool-desc { font-size: 0.82rem; color: var(--text-secondary); }
+    @media (max-width: 900px) { .portal-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .portal-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-icon" aria-hidden="true">📈</span>
+      <span>MF Dashboard</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+      <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+      <li><a href="research-portals.html" aria-current="page">🔬 Research</a></li>
+      <li><a href="learn.html">📚 Learn</a></li>
+      <li><a href="about.html">ℹ️ About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button id="hamburger" class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="mobileNav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <ul role="list">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="equity-funds.html">📊 Equity Funds</a></li>
+    <li><a href="debt-funds.html">🏦 Debt &amp; Hybrid</a></li>
+    <li><a href="research-portals.html">🔬 Research</a></li>
+    <li><a href="learn.html">📚 Learn</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+  </ul>
+</div>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<header class="page-hero">
+  <div class="container">
+    <h1>Research Portals &amp; Resources</h1>
+    <p>Curated collection of official portals, analytical tools and data sources to help you research and invest in Indian mutual funds with confidence.</p>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Official / Regulatory -->
+  <section class="section" aria-labelledby="official-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="official-heading">🏛️ Official &amp; Regulatory Portals</h2>
+        <p class="section-subtitle">Authoritative sources from SEBI, AMFI and government bodies</p>
+      </div>
+      <div class="portal-grid fade-in">
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">🏦</div>
+          <div class="portal-name">AMFI India</div>
+          <div class="portal-desc">Association of Mutual Funds in India — official NAVs, AUM data, investor education and AMC details.</div>
+          <div class="portal-tags">
+            <span class="badge badge-blue">Official</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+          <a href="https://www.amfiindia.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit AMFI ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">⚖️</div>
+          <div class="portal-name">SEBI</div>
+          <div class="portal-desc">Securities and Exchange Board of India — regulatory circulars, investor grievances, registration database.</div>
+          <div class="portal-tags">
+            <span class="badge badge-blue">Regulatory</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+          <a href="https://www.sebi.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit SEBI ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">📊</div>
+          <div class="portal-name">BSE StAR MF</div>
+          <div class="portal-desc">BSE platform for mutual fund transactions — order placement, SIP management, and portfolio tracking.</div>
+          <div class="portal-tags">
+            <span class="badge badge-blue">Transaction</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+          <a href="https://bsestarmf.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit BSE StAR ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">🗂️</div>
+          <div class="portal-name">MFCentral</div>
+          <div class="portal-desc">Consolidated view of your mutual fund portfolio across all AMCs. Powered by CAMS and KFintech.</div>
+          <div class="portal-tags">
+            <span class="badge badge-blue">Portfolio</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+          <a href="https://www.mfcentral.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit MFCentral ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">📄</div>
+          <div class="portal-name">CAMS Online</div>
+          <div class="portal-desc">Statement of accounts, transaction history, and NAV data from CAMS — one of India's largest RTAs.</div>
+          <div class="portal-tags">
+            <span class="badge badge-blue">Statement</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+          <a href="https://www.camsonline.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit CAMS ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">📁</div>
+          <div class="portal-name">KFintech</div>
+          <div class="portal-desc">Another major RTA — online transaction and statement services for Karvy-serviced AMCs.</div>
+          <div class="portal-tags">
+            <span class="badge badge-blue">Statement</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+          <a href="https://www.kfintech.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit KFintech ↗</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Research & Analytics -->
+  <section class="section" style="background:var(--bg-card);border-top:1px solid var(--border)" aria-labelledby="analytics-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="analytics-heading">🔬 Research &amp; Analytics Platforms</h2>
+        <p class="section-subtitle">Independent research tools for fund analysis and comparison</p>
+      </div>
+      <div class="portal-grid fade-in">
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">⭐</div>
+          <div class="portal-name">Value Research Online</div>
+          <div class="portal-desc">India's most popular MF research platform — fund ratings, portfolio analysis, and NAV history.</div>
+          <div class="portal-tags">
+            <span class="badge badge-yellow">Freemium</span>
+            <span class="badge badge-green">Ratings</span>
+          </div>
+          <a href="https://www.valueresearchonline.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit VRO ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">🌟</div>
+          <div class="portal-name">Morningstar India</div>
+          <div class="portal-desc">Global research firm — star ratings, analyst reports, and portfolio X-ray for Indian mutual funds.</div>
+          <div class="portal-tags">
+            <span class="badge badge-yellow">Freemium</span>
+            <span class="badge badge-green">Analyst Reports</span>
+          </div>
+          <a href="https://www.morningstar.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Morningstar ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">📉</div>
+          <div class="portal-name">Moneycontrol MF</div>
+          <div class="portal-desc">Fund screener, performance charts, news and expert opinion on Indian mutual funds.</div>
+          <div class="portal-tags">
+            <span class="badge badge-green">Free</span>
+            <span class="badge badge-blue">News</span>
+          </div>
+          <a href="https://www.moneycontrol.com/mutual-funds" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Moneycontrol ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">📈</div>
+          <div class="portal-name">ET Money</div>
+          <div class="portal-desc">Commission-free MF investing platform with smart fund recommendations and portfolio management.</div>
+          <div class="portal-tags">
+            <span class="badge badge-green">Free</span>
+            <span class="badge badge-blue">Invest</span>
+          </div>
+          <a href="https://www.etmoney.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit ET Money ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">💹</div>
+          <div class="portal-name">Groww</div>
+          <div class="portal-desc">Zero-commission direct mutual fund investing. Easy onboarding, SIP management, and tracking.</div>
+          <div class="portal-tags">
+            <span class="badge badge-green">Free</span>
+            <span class="badge badge-blue">Invest</span>
+          </div>
+          <a href="https://groww.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Groww ↗</a>
+        </article>
+
+        <article class="portal-card">
+          <div class="portal-icon" aria-hidden="true">🔍</div>
+          <div class="portal-name">Kuvera</div>
+          <div class="portal-desc">Direct plan MF investing with goal-based financial planning and tax harvesting features.</div>
+          <div class="portal-tags">
+            <span class="badge badge-green">Free</span>
+            <span class="badge badge-blue">Invest</span>
+          </div>
+          <a href="https://kuvera.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Kuvera ↗</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="section" aria-labelledby="tools-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="tools-heading">🛠️ Useful Tools &amp; Calculators</h2>
+        <p class="section-subtitle">Free online tools to aid your investment decisions</p>
+      </div>
+      <div class="card fade-in">
+        <div role="list">
+          <div class="tool-row" role="listitem">
+            <div class="tool-icon" aria-hidden="true">🧮</div>
+            <div>
+              <div class="tool-name">SIP Return Calculator</div>
+              <div class="tool-desc">Calculate future value of your monthly SIP investments with compound interest.</div>
+            </div>
+            <a href="learn.html#sip-calculator" class="btn btn-outline btn-sm">Open →</a>
+          </div>
+          <div class="tool-row" role="listitem">
+            <div class="tool-icon" aria-hidden="true">📊</div>
+            <div>
+              <div class="tool-name">AMFI NAV History</div>
+              <div class="tool-desc">Historical NAV data for all mutual fund schemes registered with AMFI.</div>
+            </div>
+            <a href="https://www.amfiindia.com/nav-history" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Visit ↗</a>
+          </div>
+          <div class="tool-row" role="listitem">
+            <div class="tool-icon" aria-hidden="true">🏠</div>
+            <div>
+              <div class="tool-name">SEBI Investor Education</div>
+              <div class="tool-desc">Official investor education material from SEBI — suitable for beginners.</div>
+            </div>
+            <a href="https://investor.sebi.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Visit ↗</a>
+          </div>
+          <div class="tool-row" role="listitem">
+            <div class="tool-icon" aria-hidden="true">💰</div>
+            <div>
+              <div class="tool-name">Tax Calculator (LTCG / STCG)</div>
+              <div class="tool-desc">Calculate long-term and short-term capital gains tax on your mutual fund redemptions.</div>
+            </div>
+            <a href="https://cleartax.in/s/mutual-fund-calculator" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Visit ↗</a>
+          </div>
+          <div class="tool-row" role="listitem">
+            <div class="tool-icon" aria-hidden="true">🔄</div>
+            <div>
+              <div class="tool-name">Direct vs Regular Plan Comparison</div>
+              <div class="tool-desc">Quantify the long-term difference in returns between direct and regular mutual fund plans.</div>
+            </div>
+            <a href="https://www.valueresearchonline.com/funds/selector/primary-category/mutual-fund/#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Visit ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMC Directory -->
+  <section class="section" style="background:var(--bg-card);border-top:1px solid var(--border)" aria-labelledby="amc-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="amc-heading">🏢 Top AMC Websites</h2>
+        <p class="section-subtitle">Direct links to major Asset Management Companies in India</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px" class="fade-in" role="list">
+        <a href="https://www.hdfcfund.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ HDFC AMC ↗</a>
+        <a href="https://www.icicipruamc.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ ICICI Pru ↗</a>
+        <a href="https://www.sbimf.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ SBI MF ↗</a>
+        <a href="https://www.axismf.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ Axis MF ↗</a>
+        <a href="https://www.kotakmf.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ Kotak MF ↗</a>
+        <a href="https://www.miraeassetmf.co.in" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ Mirae Asset ↗</a>
+        <a href="https://www.nipponindiaim.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ Nippon India ↗</a>
+        <a href="https://www.ppfas.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ PPFAS ↗</a>
+        <a href="https://www.quantmutual.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ Quant MF ↗</a>
+        <a href="https://www.utimf.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ UTI MF ↗</a>
+        <a href="https://mutualfund.adityabirlacapital.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ ABSL MF ↗</a>
+        <a href="https://www.dspim.com" target="_blank" rel="noopener noreferrer" class="card" style="padding:16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:0.9rem" role="listitem">🏛️ DSP MF ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <span class="brand-icon" aria-hidden="true">📈</span>
+          <span style="color:white">MF Dashboard</span>
+        </a>
+        <p>India's comprehensive mutual fund tracking and comparison platform.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fund Categories</h4>
+        <ul role="list">
+          <li><a href="equity-funds.html">Equity Funds</a></li>
+          <li><a href="debt-funds.html">Debt Funds</a></li>
+          <li><a href="debt-funds.html#hybrid">Hybrid Funds</a></li>
+          <li><a href="equity-funds.html#elss">ELSS / Tax Saving</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul role="list">
+          <li><a href="research-portals.html">Research Portals</a></li>
+          <li><a href="learn.html">Learn Investing</a></li>
+          <li><a href="learn.html#sip-calculator">SIP Calculator</a></li>
+          <li><a href="learn.html#glossary">Glossary</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul role="list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#contact">Contact</a></li>
+          <li><a href="about.html#disclaimer">Disclaimer</a></li>
+          <li><a href="about.html#privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MF Dashboard. For educational purposes only.</span>
+      <div class="footer-bottom-links">
+        <a href="about.html#disclaimer">Disclaimer</a>
+        <a href="about.html#privacy">Privacy</a>
+        <a href="about.html#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
